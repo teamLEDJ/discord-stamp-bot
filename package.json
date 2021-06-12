@@ -1,0 +1,24 @@
+{
+  "name": "discord-stamp",
+  "version": "0.0.1",
+  "description": "discord stamp bot",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "discord.js": "latest"
+  },
+  "engines": {
+    "node": "12.x"
+  },
+  "repository": {
+    "url": "https://glitch.com/edit/#!/glitch-hello-node"
+  },
+  "license": "MIT",
+  "keywords": [
+    "node",
+    "glitch",
+    "express"
+  ]
+}
