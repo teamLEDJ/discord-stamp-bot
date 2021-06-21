@@ -47,6 +47,12 @@ client.on("ready", message => {
 });
 
 client.on("message", async message => {
+  // ｽﾀﾝﾌﾟ君は除外だよ〜
+  if (message.author.bot) {
+    return;
+  }
+
+  // smp command
   const commands = message.content.split(" ");
   console.log(commands);
   if (commands[0] === "!smp") {
@@ -63,8 +69,32 @@ client.on("message", async message => {
     }
   }
 
-  if (message.content === "!massuparrot") {
-    message.channel.send(process.env.MASSU_URL);
+  let comment = message.content;
+  // new command
+  if (comment.indexOf("katapi") != -1) {
+    fetchValue("randomKatapi").then(res => {
+      console.log(res.data.data);
+      message.channel.send(res.data.data);
+    });
+    return;
+  } else if (comment.indexOf("mas") != -1) {
+    fetchValue("randomMassu").then(res => {
+      console.log(res.data.data);
+      message.channel.send(res.data.data);
+    });
+    return;
+  } else if (comment.indexOf("parrot") != -1) {
+    fetchValue("randomParrot").then(res => {
+      console.log(res.data.data);
+      message.channel.send(res.data.data);
+    });
+    return;
+  } else if (comment.indexOf("ぱろ") != -1) {
+    fetchValue("randomIcon").then(res => {
+      console.log(res.data.data);
+      message.channel.send(res.data.data);
+    });
+    return;
   }
 });
 
