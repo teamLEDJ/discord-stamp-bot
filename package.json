@@ -5,6 +5,11 @@
   "repository": "git@github.com:teamLEDJ/discord-stamp-bot.git",
   "author": "ktpi2000",
   "license": "MIT",
+  "scripts": {
+    "test": "ts-node src/main.ts",
+    "start": "node build/main.js",
+    "compile": "tsc -p ."
+  },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.10.2",
     "@typescript-eslint/parser": "^5.10.2",
