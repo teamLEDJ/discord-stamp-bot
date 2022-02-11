@@ -16,5 +16,8 @@ module.exports = {
     '@typescript-eslint'
   ],
   rules: {
+    semi: ['error', 'always'],
+    'comma-dangle': 0,
+    'eol-last': 0
   }
-}
+};
