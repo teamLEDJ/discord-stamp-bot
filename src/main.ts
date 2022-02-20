@@ -1,5 +1,7 @@
 import { Message, Client } from 'discord.js';
 import dotenv from 'dotenv';
+import * as admin from 'firebase-admin';
+const serviceAccount = require('../key.json');
 
 dotenv.config();
 
@@ -8,6 +10,17 @@ const client = new Client({
 });
 
 client.once('ready', () => {
+  admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+    databaseURL: process.env.DATABASE_URL,
+  });
+  const db = admin.database();
+  const ref = db.ref('room1');
+
+  ref.on('value', (snapshot) => {
+    console.log(snapshot.val());
+  });
+
   console.log(client.user?.tag);
 });
 
