@@ -6,7 +6,7 @@
   "author": "ktpi2000",
   "license": "MIT",
   "scripts": {
-    "test": "ts-node src/main.ts",
+    "dev": "ts-node src/main.ts",
     "start": "node build/main.js",
     "compile": "tsc -p ."
   },
