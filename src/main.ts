@@ -5,6 +5,8 @@ const serviceAccount = require('../key.json');
 
 dotenv.config();
 
+let triggerKeys = [];
+
 const client = new Client({
   intents: ['GUILDS', 'GUILD_MEMBERS', 'GUILD_MESSAGES'],
 });
@@ -15,10 +17,12 @@ client.once('ready', () => {
     databaseURL: process.env.DATABASE_URL,
   });
   const db = admin.database();
-  const ref = db.ref('room1');
+  const ref = db.ref();
 
   ref.on('value', (snapshot) => {
     console.log(snapshot.val());
+    triggerKeys = Object.keys(snapshot.val());
+    console.log(triggerKeys);
   });
 
   console.log(client.user?.tag);
