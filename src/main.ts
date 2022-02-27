@@ -5,26 +5,19 @@ const serviceAccount = require('../key.json');
 
 dotenv.config();
 
-let triggerKeywords: string[] = [];
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: process.env.DATABASE_URL,
+});
+const db = admin.database();
 
-const checkKeywords = (array: string[], targetText: string) => {
-  array.forEach((keyword) => {
-    if (targetText.indexOf(keyword) !== -1) {
-      console.log({ keyword });
-    }
-  });
-};
+let triggerKeywords: string[] = [];
 
 const client = new Client({
   intents: ['GUILDS', 'GUILD_MEMBERS', 'GUILD_MESSAGES'],
 });
 
 client.once('ready', () => {
-  admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
-    databaseURL: process.env.DATABASE_URL,
-  });
-  const db = admin.database();
   const ref = db.ref();
 
   ref.on('value', (snapshot) => {
@@ -45,7 +38,18 @@ client.on('messageCreate', async (message: Message) => {
 
 client.on('message', async (message) => {
   if (message.author.bot) return;
-  checkKeywords(triggerKeywords, message.content);
+
+  triggerKeywords.forEach((keyword) => {
+    if (message.content.indexOf(keyword) !== -1) {
+      console.log({ keyword });
+      const ref = db.ref(keyword);
+      ref.on('value', (snapshot) => {
+        const stampsList: string[] = snapshot.val();
+        console.log(stampsList);
+        message.channel.send(stampsList[0]);
+      });
+    }
+  });
 });
 
 client.login(process.env.TOKEN);
