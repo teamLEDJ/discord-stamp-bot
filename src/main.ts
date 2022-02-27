@@ -46,7 +46,9 @@ client.on('message', async (message) => {
       ref.on('value', (snapshot) => {
         const stampsList: string[] = snapshot.val();
         console.log(stampsList);
-        message.channel.send(stampsList[0]);
+        const randomIndex = Math.floor(Math.random() * stampsList.length);
+        console.log(randomIndex);
+        message.channel.send(stampsList[randomIndex]);
       });
     }
   });
