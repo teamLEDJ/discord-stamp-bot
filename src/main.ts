@@ -1,4 +1,4 @@
-import { Message, Client } from 'discord.js';
+import { Client } from 'discord.js';
 import dotenv from 'dotenv';
 import * as admin from 'firebase-admin';
 const serviceAccount = require('../key.json');
@@ -29,13 +29,6 @@ client.once('ready', () => {
   console.log(client.user?.tag);
 });
 
-client.on('messageCreate', async (message: Message) => {
-  if (message.author.bot) return;
-  if (message.content.startsWith('!ping')) {
-    message.channel.send('pong');
-  }
-});
-
 client.on('message', async (message) => {
   if (message.author.bot) return;
 
@@ -45,9 +38,7 @@ client.on('message', async (message) => {
       const ref = db.ref(keyword);
       ref.on('value', (snapshot) => {
         const stampsList: string[] = snapshot.val();
-        console.log(stampsList);
         const randomIndex = Math.floor(Math.random() * stampsList.length);
-        console.log(randomIndex);
         message.channel.send(stampsList[randomIndex]);
       });
     }
