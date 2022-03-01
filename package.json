@@ -6,7 +6,7 @@
   "author": "ktpi2000",
   "license": "MIT",
   "scripts": {
-    "test": "ts-node src/main.ts",
+    "dev": "ts-node src/main.ts",
     "start": "node build/main.js",
     "compile": "tsc -p ."
   },
@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "discord.js": "^13.6.0",
-    "dotenv": "^16.0.0"
+    "dotenv": "^16.0.0",
+    "firebase-admin": "^10.0.2"
   }
 }
