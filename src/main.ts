@@ -29,7 +29,7 @@ client.once('ready', () => {
   console.log(client.user?.tag);
 });
 
-client.on('message', async (message) => {
+client.on('messageCreate', async (message) => {
   if (message.author.bot) return;
 
   triggerKeywords.forEach((keyword) => {
